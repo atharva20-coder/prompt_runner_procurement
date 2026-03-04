@@ -1,0 +1,96 @@
+PL-XXXX1234:
+  last_commitment: &id001
+    amount: 3800.0
+    date: 5 days
+    source: null
+    notes: Customer offered 3800 in 5 days
+    logged_at: '2026-03-03T00:19:01'
+  commitment_history:
+  - amount: 40000.0
+    date: 3 weeks from now
+    source: Customer stated timeline
+    notes: Customer committed to pay full outstanding in 3 weeks
+    logged_at: '2026-03-02T15:50:13'
+  - amount: 2000.0
+    date: 2 days from now
+    source: Customer stated amount and timeline
+    notes: Customer committed to pay 2000 in 2 days
+    logged_at: '2026-03-02T15:51:06'
+  - amount: 4000.0
+    date: 6 days from now
+    source: Customer stated amount and timeline
+    notes: Customer committed to pay 4000 in 6 days
+    logged_at: '2026-03-02T15:52:31'
+  - amount: 4000.0
+    date: 5 days from now
+    source: Customer stated amount and timeline
+    notes: Customer committed to pay 4000 in 5 days
+    logged_at: '2026-03-02T15:52:58'
+  - amount: 2000.0
+    date: within 5 days
+    source: null
+    notes: null
+    logged_at: '2026-03-02T16:30:08'
+  - amount: 2000.0
+    date: today
+    source: null
+    notes: null
+    logged_at: '2026-03-02T16:30:38'
+  - amount: 2000.0
+    date: 8 days from now
+    source: null
+    notes: null
+    logged_at: '2026-03-02T16:40:22'
+  - amount: 4000.0
+    date: 8 days from now
+    source: null
+    notes: null
+    logged_at: '2026-03-02T16:40:39'
+  - amount: 2000.0
+    date: 02-03-2026
+    source: null
+    notes: null
+    logged_at: '2026-03-02T16:48:50'
+  - amount: 4000.0
+    date: 07-03-2026
+    source: null
+    notes: null
+    logged_at: '2026-03-02T16:48:59'
+  - amount: 2000.0
+    date: today
+    source: null
+    notes: null
+    logged_at: '2026-03-02T22:13:43'
+  - amount: 8000.0
+    date: today
+    source: null
+    notes: Customer committed to pay 8000 immediately as part of a split payment plan.
+    logged_at: '2026-03-03T00:04:07'
+  - amount: 2000.0
+    date: today
+    source: null
+    notes: Customer offered 2000 today
+    logged_at: '2026-03-03T00:18:10'
+  - amount: 2000.0
+    date: 5 days
+    source: null
+    notes: Customer offered 2000 in 5 days
+    logged_at: '2026-03-03T00:18:38'
+  - *id001
+  quoted_amounts:
+  - 40000.0
+  - 2000.0
+  - 4000.0
+  - 4000.0
+  - 2000.0
+  - 2000.0
+  - 2000.0
+  - 4000.0
+  - 2000.0
+  - 4000.0
+  - 2000.0
+  - 8000.0
+  - 2000.0
+  - 2000.0
+  - 3800.0
+  max_quoted_amount: 40000.0

@@ -1,0 +1,59 @@
+llm:
+  # LiteLLM model string — provider prefix routes to the right backend
+  # Examples: gemini/gemini-2.5-flash, ollama/llama3.1, openai/gpt-4o, vertex_ai/gemini-2.5-flash
+
+  # --- Gemini (direct API key) ---
+  # model: gemini/gemini-2.5-flash
+  # api_key: AIzaSyAGyGgFyvYp0hAe2vxt5pdSMg0THmqVfx4
+
+  # --- OpenRouter ---
+  # model: openrouter/anthropic/claude-haiku-4.5
+  # api_key: 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
+
+  # --- Vertex AI ---
+  model: vertex_ai/gemini-2.5-flash
+  extra_params:
+    vertex_project: "project-fc960f8d-8ac3-4ea1-93b"
+    vertex_location: "asia-southeast1"
+    vertex_credentials: "./service-account-key.json"
+
+  temperature: 0
+  reasoning_effort: none # none, low, medium, high (maps to Gemini thinking budget)
+  streaming: true
+  warmup: true # Set to false to skip model pre-warming
+  prompt_caching: true # Enable prompt caching (cache_control on system prompt)
+
+  # --- Ollama (local) ---
+  # model: ollama_chat/qwen2.5:14b
+  # api_base: http://localhost:11434
+
+tools:
+  scripts_dir: ./scripts
+
+  # --- Single-stage testing mode (uncomment ONE block below) ---
+  # system_prompt: Intro_stage_prompt.md
+  # enabled:
+  #   - intro_next_stage
+
+  # system_prompt: Investigation_stage_prompt
+  # enabled:
+  #   - get_delay_script
+  #   - investigation_next_stage
+
+  # system_prompt: Recovery_stage_prompt.md
+  # enabled:
+  #   - recovery_next_stage
+
+  # system_prompt: Exit_stage_prompt.md
+  # enabled:
+  #   - end_call
+
+# --- Orchestrator mode (chained stages) ---
+orchestrator:
+  enabled: true
+  customer_data: ./customer_data.yaml
+  stages: ./stages.yaml
+  start_stage: intro
+
+logging:
+  level: INFO

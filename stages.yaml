@@ -1,0 +1,39 @@
+# Stage Pipeline Configuration
+# Defines stage order, prompts, tools, and transitions
+
+pipeline:
+  - name: intro
+    prompt: Intro_stage_prompt.md
+    tools:
+      - intro_next_stage
+    transitions:
+      INVESTIGATION: investigation
+      RECOVERY: recovery # Avoidance path (3+ non-responses)
+
+  - name: investigation
+    prompt: Investigation_stage_prompt
+    tools:
+      - get_delay_script
+      - investigation_next_stage
+    transitions:
+      RECOVERY: recovery
+
+  - name: recovery
+    prompt: Recovery_stage_prompt.md
+    modules:
+      - prompt_modules/recovery/01_persona_behavior.md
+      - prompt_modules/recovery/02_data_context.md
+      - prompt_modules/recovery/03_guardrails_defense.md
+      - prompt_modules/recovery/04_negotiation_engine.md
+      - prompt_modules/recovery/05_entry_exit.md
+    tools:
+      - recovery_next_stage
+      - log_payment_commitment
+    transitions:
+      EXIT: exit
+
+  - name: exit
+    prompt: Exit_stage_prompt.md
+    tools:
+      - end_call
+    transitions: {} # Terminal stage

@@ -1,0 +1,44 @@
+INPUT:
+
+## Handoff from Recovery Stage
+
+exit_path: PAYMENT_IMMEDIATE
+
+commitment:
+  amount: 20000
+  date: "today"
+  is_split: true
+  remainder_amount: 16000
+  remainder_date: "10 days later"
+
+recovery_summary:
+  final_outcome: "Split payment secured: ₹4,000 today, ₹16,000 in 10 days."
+  stage_traversed: STAGE_C
+  tactics_used: ["CN", "SP"]
+
+reason: "Customer agreed to a split payment of ₹4,000 today and ₹16,000 in 10 days."
+
+---
+
+## Expected EXIT_STAGE_INFO Initial State
+
+```json
+{
+  "exit_path": "PAYMENT_IMMEDIATE",
+  "payment_amount": 4000,
+  "payment_confirmed": null,
+  "follow_up_slot": null,
+  "follow_up_reason": "Balance payment of ₹16,000 due in 10 days",
+  "escalation_reason": null,
+  "call_outcome": null,
+  "exit_complete": false
+}
+```
+
+## Your Task
+
+1. Confirm immediate payment of ₹4,000
+2. Send payment link
+3. Wait for payment confirmation
+4. Confirm follow-up for balance ₹16,000
+5. Call `end_call()` with appropriate data

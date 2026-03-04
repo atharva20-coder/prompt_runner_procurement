@@ -1,0 +1,52 @@
+# Customer & Loan Information
+# All values here are injected into stage prompts via {placeholder} tokens
+
+customer:
+  customer_name: "Shubham Verma"
+  loan_number: "PL-XXXX1234"
+  product_type: "Personal Loan"
+  bank_name: "HSFC Bank"
+  masked_account: "XXXX1234"
+  multiple_relationship: "No"
+  relationship_type: "Borrower"
+
+loan:
+  sanctioned_amount: "₹4,00,000"
+  loan_start_date: "01-01-2022"
+  emi_amount: "₹20,000"
+  emi_date: "5th of every month"
+  repayment_mode: "Auto-debit"
+  payment_mode: "NACH"
+  savings_linked: "Yes"
+  lien_marking: "Yes"
+
+outstanding:
+  pending_amount: "₹40,000"
+  outstanding_breakup: "₹40,000 (2 × ₹20,000 EMI)"
+  principal_outstanding: "₹1,40,000"
+  dpd: "40"
+  missed_emi_count: "2"
+
+payment_history:
+  last_payment_date: "05-11-2025"
+  last_payment_amount: "₹20,000"
+
+legal:
+  legal_status: "Pre-legal"
+  legal_notices_sent: "No"
+  case_nature: "NA"
+  court_details: "NA"
+  next_hearing_date: "NA"
+
+settlement:
+  pq_eligible: "Yes"
+  settlement_value: "₹X,XX,XXX"
+  settlement_emi_options: "3 / 6 / 9 / 12"
+
+follow_up_slots:
+  option_a_date: "Tomorrow"
+  option_a_time: "9:00 AM"
+  option_b_date: "Tomorrow"
+  option_b_time: "1:00 PM"
+  option_c_date: "Day after tomorrow"
+  option_c_time: "9:00 AM"

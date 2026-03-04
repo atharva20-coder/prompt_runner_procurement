@@ -1,0 +1,39 @@
+- exit_path: FOLLOW_UP_SCHEDULED
+  call_outcome: FOLLOW_UP_BOOKED
+  payment: null
+  follow_up:
+    slot: 04-03-2026 09:00 AM
+    reason: Customer committed to pay 4000 by March 7th, which is within the 5-day
+      limit for Stage D and above the floor amount.
+  escalation: null
+  commitment_summary:
+    amount: 4000
+    is_split: false
+    date: 07-03-2026
+  logged_at: '2026-03-02T16:49:49'
+- exit_path: FOLLOW_UP_SCHEDULED
+  call_outcome: FOLLOW_UP_BOOKED
+  payment: null
+  follow_up:
+    slot: 04-03-2026 09:00 AM
+    reason: Customer committed to pay 4000 by March 7th, which is within the 5-day
+      limit for Stage D and above the floor amount.
+  escalation: null
+  commitment_summary:
+    date: 07-03-2026
+    amount: 4000
+    is_split: false
+  logged_at: '2026-03-02T16:50:06'
+- exit_path: FOLLOW_UP_SCHEDULED
+  call_outcome: FOLLOW_UP_BOOKED
+  payment: null
+  follow_up:
+    slot: 04-03-2026 09:00 AM
+    reason: Customer committed to pay 4000 by March 7th, which is within the 5-day
+      limit for Stage D and above the floor amount.
+  escalation: null
+  commitment_summary:
+    date: 07-03-2026
+    is_split: false
+    amount: 4000
+  logged_at: '2026-03-02T16:50:12'
