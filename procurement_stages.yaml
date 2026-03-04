@@ -1,0 +1,42 @@
+# Procurement Stage Pipeline Configuration
+# Defines stage order, prompts, tools, and transitions for procurement.
+# This is the procurement equivalent of stages.yaml (recovery pipeline).
+#
+# Pipeline: Discovery → Qualification → Negotiation → Exit
+# Each tool signals a StageTransitionSignal to advance to the next stage.
+
+pipeline:
+  - name: discovery
+    prompt: Intro_stage_prompt.md
+    tools:
+      - discovery_next_stage
+    transitions:
+      QUALIFICATION: qualification
+
+  - name: qualification
+    prompt: Procurement_qualification_stage_prompt.md
+    tools:
+      - get_category_script
+      - qualification_next_stage
+    transitions:
+      NEGOTIATION: negotiation
+
+  - name: negotiation
+    prompt: Procurement_stage_prompt.md
+    modules:
+      - prompt_modules/procurement/01_persona_behavior.md
+      - prompt_modules/procurement/02_data_context.md
+      - prompt_modules/procurement/03_guardrails_defense.md
+      - prompt_modules/procurement/04_negotiation_engine.md
+      - prompt_modules/procurement/05_entry_exit.md
+    tools:
+      - procurement_next_stage
+      - log_negotiation_position
+    transitions:
+      EXIT: exit
+
+  - name: exit
+    prompt: Procurement_exit_stage_prompt.md
+    tools:
+      - end_negotiation
+    transitions: {} # Terminal stage

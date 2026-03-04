@@ -30,7 +30,12 @@ llm:
 tools:
   scripts_dir: ./scripts
 
-  # --- Single-stage testing mode (uncomment ONE block below) ---
+  # ============================================================
+  # SINGLE-STAGE TESTING MODE
+  # Uncomment ONE block below to test a single stage in isolation.
+  # ============================================================
+
+  # --- Recovery Pipeline Stages ---
   # system_prompt: Intro_stage_prompt.md
   # enabled:
   #   - intro_next_stage
@@ -48,12 +53,37 @@ tools:
   # enabled:
   #   - end_call
 
-# --- Orchestrator mode (chained stages) ---
+  # --- Procurement Pipeline Stages ---
+  # system_prompt: Intro_stage_prompt.md        # Discovery stage
+  # enabled:
+  #   - discovery_next_stage
+
+  # system_prompt: Procurement_qualification_stage_prompt.md
+  # enabled:
+  #   - get_category_script
+  #   - qualification_next_stage
+
+  # system_prompt: Procurement_stage_prompt.md  # Negotiation stage
+  # enabled:
+  #   - procurement_next_stage
+  #   - log_negotiation_position
+
+  # system_prompt: Procurement_exit_stage_prompt.md
+  # enabled:
+  #   - end_negotiation
+
+# ============================================================
+# ORCHESTRATOR MODE (chained stages)
+# Set pipeline to "recovery" or "procurement" to select the flow.
+# The pipeline preset auto-selects stages.yaml, data file, and start stage.
+# ============================================================
 orchestrator:
   enabled: true
-  customer_data: ./customer_data.yaml
-  stages: ./stages.yaml
-  start_stage: intro
+  pipeline: procurement # "recovery" or "procurement"
+  # Override preset defaults if needed:
+  # customer_data: ./supplier_data.yaml
+  # stages: ./procurement_stages.yaml
+  # start_stage: discovery
 
 logging:
   level: INFO

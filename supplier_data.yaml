@@ -1,0 +1,42 @@
+# Supplier & Contract Information (Procurement Pipeline)
+# All values here are injected into stage prompts via {placeholder} tokens.
+# This is the procurement equivalent of customer_data.yaml.
+
+supplier:
+  company_name: "TechCorp Industries"
+  supplier_name: "CloudMatrix Solutions"
+  supplier_contact_name: "Priya Sharma"
+  category: "SAAS_SOFTWARE"
+
+contract:
+  current_unit_price: "₹15,000/license/month"
+  current_payment_terms: "Net 30"
+  current_rebate_structure: "None"
+  contract_duration: "12 months"
+  renewal_date: "2026-04-15"
+  auto_renewal: "Yes"
+  annual_volume: "500 licenses"
+  annual_spend: "₹90,00,000"
+
+objectives:
+  price_best_case: "₹12,000/license/month"
+  price_bare_min: "₹14,000/license/month"
+  price_concession_available: "₹1,000/license (from ₹15,000 to ₹14,000)"
+  payment_best_case: "Net 60"
+  payment_bare_min: "Net 45"
+  payment_concession_available: "15 days (from Net 30 to Net 45)"
+  rebate_best_case: "5% annual volume rebate"
+  rebate_bare_min: "2% annual volume rebate"
+  rebate_concession_available: "3% (from 2% to 5%)"
+
+constraints:
+  max_volume_increase_pct: "15"
+  max_exchange_count: "20"
+
+follow_up_slots:
+  option_a_date: "Tomorrow"
+  option_a_time: "9:00 AM"
+  option_b_date: "Tomorrow"
+  option_b_time: "1:00 PM"
+  option_c_date: "Day after tomorrow"
+  option_c_time: "9:00 AM"

@@ -10,14 +10,25 @@ from config_loader import Config, load_config, load_system_prompt
 from litellm_provider import LiteLLMProvider
 from tool_registry import ToolRegistry
 
-# Tool name to class mapping
+# Tool name → class mapping.
+# Both recovery and procurement tools live here so register_tools()
+# can build a registry for any stage in either pipeline.
 TOOL_CLASSES = {
+    # ── Recovery Pipeline Tools ──
     "get_delay_script": "DelayScriptTool",
     "investigation_next_stage": "InvestigationNextStageTool",
     "log_payment_commitment": "LogPaymentCommitmentTool",
     "recovery_next_stage": "RecoveryNextStageTool",
     "intro_next_stage": "IntroNextStageTool",
     "end_call": "EndCallTool",
+    # ── Procurement Pipeline Tools ──
+    # Discovery → Qualification → Negotiation → Exit
+    "discovery_next_stage": "DiscoveryNextStageTool",
+    "get_category_script": "CategoryScriptTool",
+    "qualification_next_stage": "QualificationNextStageTool",
+    "procurement_next_stage": "ProcurementNextStageTool",
+    "log_negotiation_position": "LogPaymentCommitmentTool",  # reuse for position tracking
+    "end_negotiation": "EndNegotiationTool",
 }
 
 
