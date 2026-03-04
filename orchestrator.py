@@ -35,19 +35,33 @@ class StageTransitionSignal(Exception):
         )
 
 
-# Tool name to class mapping (same as main.py)
+# Tool name → class mapping (same as main.py).
+# Both recovery and procurement tools live here so the orchestrator
+# can build registries for any pipeline defined in stages YAML.
 TOOL_CLASSES = {
+    # ── Recovery Pipeline Tools ──
     "get_delay_script": "DelayScriptTool",
     "investigation_next_stage": "InvestigationNextStageTool",
     "log_payment_commitment": "LogPaymentCommitmentTool",
     "recovery_next_stage": "RecoveryNextStageTool",
     "intro_next_stage": "IntroNextStageTool",
     "end_call": "EndCallTool",
+    # ── Procurement Pipeline Tools ──
+    # Discovery → Qualification → Negotiation → Exit
+    "discovery_next_stage": "DiscoveryNextStageTool",
+    "get_category_script": "CategoryScriptTool",
+    "qualification_next_stage": "QualificationNextStageTool",
+    "procurement_next_stage": "ProcurementNextStageTool",
+    "log_negotiation_position": "LogPaymentCommitmentTool",  # reuse commitment logger for position tracking
+    "end_negotiation": "EndNegotiationTool",
 }
 
 
 class Orchestrator:
-    """Chains stages together — Intro → Investigation → Recovery → Exit.
+    """Chains stages together for any pipeline (recovery or procurement).
+
+    Recovery:    Intro → Investigation → Recovery → Exit
+    Procurement: Discovery → Qualification → Negotiation → Exit
 
     Each stage gets a fresh Agent with its own system prompt, tools,
     and no conversation history from previous stages. Only the structured
@@ -63,7 +77,10 @@ class Orchestrator:
         self.composer = PromptComposer(
             config.tools.scripts_dir, self.customer_data
         )
-        self.current_stage_name = config.orchestrator.start_stage
+        # Resolve start stage from pipeline preset (recovery→intro, procurement→discovery)
+        from config_loader import _resolve_preset
+        resolved = _resolve_preset(config)
+        self.current_stage_name = resolved["start_stage"]
 
         # Pre-build tool registries for all stages
         self._registries: dict[str, ToolRegistry] = {}

@@ -1,0 +1,48 @@
+<!-- PURPOSE: Sample input for the Procurement Negotiation stage. This file provides
+     a complete example of the data NARA receives when entering the negotiation stage,
+     mirroring the structure of the recovery_stage_input for the debt collection flow. -->
+
+INPUT:
+  - supplier_context:
+    company_name: "TechCorp Industries"
+    supplier_name: "CloudMatrix Solutions"
+    supplier_contact_name: "Priya Sharma"
+    category: "SAAS_SOFTWARE"
+    current_unit_price: "₹15,000/license/month"
+    current_payment_terms: "Net 30"
+    current_rebate_structure: "None"
+    contract_duration: "12 months"
+    renewal_date: "2026-04-15"
+    auto_renewal: true
+    annual_volume: "500 licenses"
+    annual_spend: "₹90,00,000"
+
+  - negotiation_objectives:
+    price:
+      best_case: "₹12,000/license/month"
+      bare_minimum: "₹14,000/license/month"
+    payment_terms:
+      best_case: "Net 60"
+      bare_minimum: "Net 45"
+    rebate:
+      best_case: "5% annual volume rebate"
+      bare_minimum: "2% annual volume rebate"
+
+  - constraints:
+    max_volume_increase_pct: 15
+    max_exchange_count: 20
+
+  - qualification_context:
+    category_confirmed: "SAAS_SOFTWARE"
+    relationship_context: "Good partnership, reliable uptime, some concern about price increases"
+    supplier_opening_position: "PRICE_INCREASE_REQUESTED"
+    supplier_sentiment: "TRANSACTIONAL"
+    market_position: "annual_recurring_revenue"
+    contract_flexibility: "FLEXIBLE"
+    competitor_pressure: "MODERATE"
+
+  - commitment:
+    agreed_price: null
+    agreed_payment_terms: null
+    agreed_rebate: null
+    commitment_history: []

@@ -349,9 +349,11 @@ class Agent:
                 })
                 continue
 
-            # Safety net: If recovery stage produces plain text without JSON state,
+            # Safety net: If recovery/negotiation stage produces plain text without JSON state,
             # nudge the model ONCE to re-respond with proper format.
-            if self.stage_name == "recovery" and content and not json_nudge_sent:
+            # Both recovery (debt collection) and negotiation (procurement) stages
+            # require the {state, agent} JSON output format.
+            if self.stage_name in ("recovery", "negotiation") and content and not json_nudge_sent:
                 clean = content.strip()
                 if clean.startswith("```"):
                     clean = clean.split("\n", 1)[1] if "\n" in clean else clean[3:]

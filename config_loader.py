@@ -32,13 +32,35 @@ class ToolsConfig(BaseModel):
     enabled: list[str] = Field(default_factory=list)
 
 
+# ── Pipeline presets: maps pipeline name → (stages file, data file, start stage) ──
+# This avoids hardcoding paths — just set `pipeline: procurement` in config.yaml.
+PIPELINE_PRESETS = {
+    "recovery": {
+        "stages": "./stages.yaml",
+        "customer_data": "./customer_data.yaml",
+        "start_stage": "intro",
+    },
+    "procurement": {
+        "stages": "./procurement_stages.yaml",
+        "customer_data": "./supplier_data.yaml",
+        "start_stage": "discovery",
+    },
+}
+
+
 class OrchestratorConfig(BaseModel):
-    """Orchestrator configuration for chained stage mode."""
+    """Orchestrator configuration for chained stage mode.
+
+    The `pipeline` field selects which preset to use (recovery or procurement).
+    Individual fields (stages, customer_data, start_stage) can still be
+    overridden explicitly in config.yaml if needed.
+    """
 
     enabled: bool = False
-    customer_data: str = "./customer_data.yaml"
-    stages: str = "./stages.yaml"
-    start_stage: str = "intro"
+    pipeline: str = "recovery"  # "recovery" or "procurement" — selects preset defaults
+    customer_data: str | None = None  # Override preset if needed
+    stages: str | None = None         # Override preset if needed
+    start_stage: str | None = None    # Override preset if needed
 
 
 class LoggingConfig(BaseModel):
@@ -82,16 +104,36 @@ def load_system_prompt(config: Config) -> str | None:
         return f.read()
 
 
-def load_customer_data(config: Config) -> dict:
-    """Load customer data from YAML file and flatten into a single dict.
+def _resolve_preset(config: Config) -> dict:
+    """Resolve pipeline preset defaults, allowing explicit overrides.
 
-    Nested sections (customer, loan, outstanding, etc.) are flattened
-    so that {customer_name}, {emi_amount}, {dpd} etc. work directly
-    as template placeholders.
+    If config.yaml specifies `pipeline: procurement`, the preset provides
+    default values for stages, customer_data, and start_stage. Any
+    explicitly set field in config.yaml takes precedence over the preset.
     """
-    path = Path(config.orchestrator.customer_data)
+    orch = config.orchestrator
+    preset = PIPELINE_PRESETS.get(orch.pipeline, PIPELINE_PRESETS["recovery"])
+    return {
+        "stages": orch.stages or preset["stages"],
+        "customer_data": orch.customer_data or preset["customer_data"],
+        "start_stage": orch.start_stage or preset["start_stage"],
+    }
+
+
+def load_customer_data(config: Config) -> dict:
+    """Load customer/supplier data from YAML file and flatten into a single dict.
+
+    Nested sections (customer, loan, supplier, contract, etc.) are flattened
+    so that {customer_name}, {supplier_name}, {annual_spend} etc. work directly
+    as template placeholders.
+
+    The file path is resolved from the pipeline preset (recovery → customer_data.yaml,
+    procurement → supplier_data.yaml) unless explicitly overridden in config.yaml.
+    """
+    resolved = _resolve_preset(config)
+    path = Path(resolved["customer_data"])
     if not path.exists():
-        raise FileNotFoundError(f"Customer data file not found: {path}")
+        raise FileNotFoundError(f"Data file not found: {path}")
 
     with open(path, "r", encoding="utf-8") as f:
         raw = yaml.safe_load(f) or {}
@@ -110,13 +152,17 @@ def load_customer_data(config: Config) -> dict:
 def load_stages_config(config: Config) -> dict:
     """Load stages pipeline from YAML file.
 
+    The file path is resolved from the pipeline preset (recovery → stages.yaml,
+    procurement → procurement_stages.yaml) unless explicitly overridden.
+
     Returns a dict keyed by stage name, e.g.:
     {
-        "intro": {"prompt": "Intro_stage_prompt.md", "tools": [...], "transitions": {...}},
+        "discovery": {"prompt": "Intro_stage_prompt.md", "tools": [...], "transitions": {...}},
         ...
     }
     """
-    path = Path(config.orchestrator.stages)
+    resolved = _resolve_preset(config)
+    path = Path(resolved["stages"])
     if not path.exists():
         raise FileNotFoundError(f"Stages config file not found: {path}")
 

@@ -1,0 +1,53 @@
+# PURPOSE: Sample input for the Procurement Exit/Closure stage.
+# This file provides a complete example of the handoff data NARA receives
+# when entering the exit stage from the Negotiation stage.
+
+INPUT:
+
+## Handoff from Negotiation Stage
+
+exit_path: DEAL_CLOSED
+
+commitment:
+  price: "₹13,500/license/month"
+  payment_terms: "Net 45"
+  rebate: "3% annual volume rebate"
+  conditions:
+    - "Volume commitment increased by 10% to 550 licenses"
+    - "2-year contract lock-in for rate protection"
+
+negotiation_summary:
+  total_exchanges: 14
+  strategies_used:
+    [
+      "Anchoring",
+      "Logrolling",
+      "Framing",
+      "Labelled Concession",
+      "Summary/Recap",
+    ]
+  levers_used:
+    [
+      "Unit price reduction",
+      "Volume-based discount",
+      "Payment days extension",
+      "Volume-tiered rebate",
+    ]
+  nudges_used: ["VF1", "PP2", "MB3", "RN1", "WW2", "CS1", "CS2"]
+  deal_quality_score: 78
+
+savings_estimate:
+  vs_current: "10% reduction from ₹15,000 to ₹13,500"
+  vs_bare_min: "3.6% better than ₹14,000 walk-away"
+  total_annual_savings: "₹9,90,000 annual savings on price alone"
+
+reason: "Supplier agreed to ₹13,500/license at Net 45 with 3% rebate, in exchange for 10% volume increase and 2-year lock-in."
+
+---
+## Your Task
+
+1. Summarise agreed terms to supplier for confirmation
+2. Confirm mutual understanding on all conditions
+3. State next steps (term sheet / PO generation)
+4. Close with partnership language
+5. Call end_negotiation() with agreed_terms and savings_estimate

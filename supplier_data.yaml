@@ -1,0 +1,43 @@
+# Supplier & Contract Information (Procurement Pipeline)
+# All values here are injected into stage prompts via {placeholder} tokens.
+# This is the procurement equivalent of customer_data.yaml.
+
+supplier:
+  company_name: "TechCorp Industries"
+  supplier_name: "Acme Industrial Supplies"
+  supplier_contact_name: "John Doe"
+  category: "PACKAGING_CONSUMABLES"
+  scenario: "COST_INFLATION"
+
+contract:
+  current_unit_price: "₹100/unit"
+  current_payment_terms: "Net 30"
+  current_rebate_structure: "None"
+  contract_duration: "12 months"
+  renewal_date: "2026-04-15"
+  auto_renewal: "Yes"
+  annual_volume: "2,50,000 units"
+  annual_spend: "₹2,50,00,000 (2.5 Crore)"
+
+objectives:
+  price_best_case: "₹92/unit (8% reduction)"
+  price_bare_min: "₹97/unit (3% reduction)"
+  price_concession_available: "₹3/unit (from ₹100 to ₹97)"
+  payment_best_case: "Net 60"
+  payment_bare_min: "Net 45"
+  payment_concession_available: "15 days (from Net 30 to Net 45)"
+  rebate_best_case: "1.5% annual volume rebate"
+  rebate_bare_min: "No rebate required"
+  rebate_concession_available: "1.5%"
+
+constraints:
+  max_volume_increase_pct: "15"
+  max_exchange_count: "20"
+
+follow_up_slots:
+  option_a_date: "Tomorrow"
+  option_a_time: "9:00 AM"
+  option_b_date: "Tomorrow"
+  option_b_time: "1:00 PM"
+  option_c_date: "Day after tomorrow"
+  option_c_time: "9:00 AM"
