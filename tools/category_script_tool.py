@@ -34,6 +34,12 @@ CATEGORY_SCRIPT_MAP = {
     "MRO_INDIRECT": "mro_indirect_script.md",
     "IT_HARDWARE": "it_hardware_script.md",
     "PACKAGING_CONSUMABLES": "packaging_consumables_script.md",
+    "COST_INFLATION": "cost_inflation_script.md",
+    "CAPACITY_CONSTRAINT": "capacity_constraint_script.md",
+    "SUPPLY_CHAIN_DISRUPTION": "supply_chain_disruption_script.md",
+    "SINGLE_SOURCE_DEPENDENCY": "single_source_dependency_script.md",
+    "QUALITY_DEFECT_RESOLUTION": "quality_defect_resolution_script.md",
+    "DEMAND_SURGE": "demand_surge_allocation_script.md",
 }
 
 VALID_CATEGORIES = list(CATEGORY_SCRIPT_MAP.keys())
@@ -63,7 +69,7 @@ class CategoryScriptTool(Tool):
                 "supplier_category": {
                     "type": "string",
                     "enum": VALID_CATEGORIES,
-                    "description": "The confirmed supplier category from the Discovery stage.",
+                    "description": "The confirmed supplier category or specific negotiation scenario (e.g. COST_INFLATION).",
                 }
             },
             "required": ["supplier_category"],

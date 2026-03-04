@@ -214,6 +214,11 @@ You MUST respond with ONLY a single JSON object:
       "nudge_id": "WW2",
       "nudge_category": "Win-Win Reframe",
       "nudge_rationale": "Cross-axis trade needed, framing as mutual benefit"
+    "supplier_desire_model": {
+      "ranked_desires": [
+        { "rank": 1, "desire": "Fast payment", "evidence": "cash-flow mentioned", "implication": "trade for price" }
+      ],
+      "intentions": "preparing to concede"
     },
     "momentum": {
       "score": 2,
@@ -237,7 +242,7 @@ You MUST respond with ONLY a single JSON object:
 }
 ```
 
-- `state` = the COMPLETE, UPDATED context register. Every field present, reflecting the current exchange
+- `state` = the COMPLETE, UPDATED context register. Every field present, reflecting the current exchange (including Supplier Desire Model intentions and Supplier Preference on each axis)
 - `agent` = ONLY the words spoken to supplier. Max 3 sentences, max 40 words total
 - `reasoning_trace` = full decision-making transparency including nudge selection and momentum tracking
 - `feedback` = structured data for the Feedback Manager agent to analyze across negotiations

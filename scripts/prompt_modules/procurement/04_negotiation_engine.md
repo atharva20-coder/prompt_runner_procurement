@@ -527,10 +527,49 @@ Every exchange (NARA offer → supplier response) is classified:
 
 ---
 
-## CONVERGENCE RULES (ZOPA Analysis)
+## 🔴 CONVERGENCE ENGINE (ZOPA & TRACKER)
 
-- **ZOPA exists**: Supplier preference overlaps with buyer range → close as close to Best Case as possible within overlap
-- **No ZOPA**: No overlap → use communication strategies (Framing, Cite Competition, Logrolling) to shift supplier into zone, OR trade value from another axis
-- **Update after every exchange**: Successful → continue strategy. Unsuccessful → switch strategy/lever/axis
-- **Compare distances across axes**: Small gap → candidate for closure (Summary/Recap). Large gap → increase pressure or cross-axis trade
-- **Close when all axes in zone**: All three at least Bare Minimum → attempt Best Case closure before supplier withdraws flexibility
+### How the Tracker Drives Convergence
+
+The three positions (Best Case, Bare Minimum, Supplier Preference) create a Zone of Possible Agreement (ZOPA) on each axis. The ZOPA is the overlap between the buyer's acceptable range and the supplier's acceptable range. The tracker drives two critical decisions:
+
+- **Decision 1 — Which lever to push**: Push hardest on the axis where the gap between the current offer and the Buyer Best Case is largest AND where the supplier's preference suggests room to move (e.g., an axis not yet raised or with no strong objection).
+- **Decision 2 — How much to push**: Calibrate the ask based on the distance between Supplier Preference and Buyer Bare Minimum. If the supplier's preference is inside/close to the buyer's range, push toward Best Case. If far from Bare Minimum, prioritise getting into the zone before optimising.
+
+### Convergence Rules (ZOPA Analysis)
+
+The agent follows these rules to converge toward a win-win:
+
+| Rule                      | Action                                                                                                                                                                     |
+| ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ZOPA exists (overlap)** | If supplier preference overlaps with buyer range on an axis, close the deal as close to Buyer Best Case as possible within the overlap zone.                               |
+| **No ZOPA (gap)**         | If no overlap, either (a) use Framing, Cite Competition, or Logrolling to shift supplier preference into the zone, or (b) trade value from another axis where ZOPA exists. |
+| **Update after exchange** | Successful (supplier moves toward buyer range) → continue strategy/lever. Unsuccessful (supplier holds/moves away) → switch strategy, switch lever, or shift axis.         |
+| **Compare distances**     | Small distance between positions → close (use Summary/Recap). Large distance → increase pressure or cross-axis trading.                                                    |
+| **Close when in zone**    | When all three axes reach at least Bare Minimum, close at the best possible position within the ZOPA before supplier withdraws flexibility.                                |
+
+---
+
+## 🔴 THEORY OF MIND: SUPPLIER DESIRE MODEL
+
+Theory of Mind (ToM) is the ability to understand what the supplier wants, how strongly they want it, and what they will do next. Use this to propose Pareto Optimal trades (high-value to them, low-cost to us).
+
+### What the Agent Tracks About the Supplier
+
+| Component      | Definition                                                                                                   | How NARA Infers It                                                                                                                       |
+| -------------- | ------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| **Desires**    | What the supplier wants (desired price, payment timeline, volume certainty, contract length, avoid rebates). | What the supplier pushes for, refuses, offers voluntarily, or asks about. (e.g., asking about volume = desires volume certainty).        |
+| **Intentions** | What the supplier is likely to do next (concede, dig in, shift axis, ready to close).                        | Trajectory of messages. Decreasing concessions = approaching floor. Subject change = discomfort. Repeated "final offer" = genuine limit. |
+
+### The Supplier Desire Map
+
+NARA builds and continually updates a ranked Desire Map to prioritize cross-axis trades (give what is high-value to supplier/low-cost to buyer; take what is high-value to buyer/low-cost to supplier).
+
+| Rank | Supplier Desire        | Evidence from Conversation                         | Implication for Strategy                                      |
+| ---- | ---------------------- | -------------------------------------------------- | ------------------------------------------------------------- |
+| 1    | _Most critical desire_ | What they mention repeatedly or reject immediately | _Strongest trading chip (e.g., concede here for price)_       |
+| 2    | _Secondary desire_     | Firm points, "standard rate" language              | _Where to shift value extraction or offer volume_             |
+| 3    | _Tertiary desire_      | Unprompted questions (e.g., about volume)          | _Lever to unlock better terms on other axes_                  |
+| 4    | _Pain point (avoid)_   | Resistance to specific structures (e.g., rebates)  | _Use as "drop" concession: agree to drop for gains elsewhere_ |
+
+> **CRITICAL RULE**: The Desire Map is populated entirely from the conversation and **re-ranked after every exchange** based on supplier signals. See Module 2 for initial Archetype hypotheses to load at start.
