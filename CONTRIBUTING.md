@@ -99,7 +99,7 @@ Go to the repository on **GitHub** and open a Pull Request from your feature bra
 
 ### Step 2 — Get Approval
 
-**Shubham must approve the PR** before it can be merged. Address any review comments and push fixes to the same branch:
+**Maintainers** approve the PR\*\* before it can be merged. Address any review comments and push fixes to the same branch:
 
 ```bash
 git add .
